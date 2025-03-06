@@ -63,7 +63,7 @@ class ParsManager(CaptchaMixin):
 
         await self.init_session()
 
-        for links in self.chunks(self.pars_urls, 1):
+        for links in self.chunks(self.pars_urls, 2):
             processes: [Awaitable] = [
                 self.pars_data(link)
                 for link in links
@@ -71,5 +71,3 @@ class ParsManager(CaptchaMixin):
             ]
 
             await asyncio.gather(*processes)
-
-            await asyncio.sleep(1000)
